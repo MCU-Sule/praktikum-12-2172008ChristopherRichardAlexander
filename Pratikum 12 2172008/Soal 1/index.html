@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="2172008 Christopher Richard Alexander">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        button{
+            width: 60px;
+            height: 40px;
+        }
+        div{
+            background-color: lightgreen;
+            width: 100%;
+            height: 30%;
+            margin: auto;
+            text-align: center;
+        }
+        fieldset{
+            width: 19%;
+            margin: auto;
+        }
+        button{
+            width: 100px;
+            height: 20px;
+            float: right;
+        }
+    </style>
+</head>
+<body onload="kota()">
+    <fieldset>
+            <legend>City</legend>
+            <label>Name</label>
+                <input id="input" name="city" list="city">
+                    <datalist id="city">
+                    </datalist>
+            <button onclick="cek()">Submit Query</button>
+    </fieldset>
+    <div>
+        <h1 id="nama"></h1>
+        <h3 id="country"></h3>
+        <h3 id="coor"></h3>
+    </div>
+    <script>
+        function kota(){
+            $.getJSON("citylist.json", function(result){
+                for(let i=0;i<result.city.length;i++){
+                   document.querySelector("#city").innerHTML+="<option id ='data' value='"+result.city[i].name+"'></option>";
+
+                }
+            });
+        }
+        function cek(){
+            let input= document.querySelector("#input").value;
+            $.getJSON("citylist.json", function(result){
+                for(let i=0;i<result.city.length;i++){
+                    if(result.city[i].name==input){
+                        document.querySelector("#nama").innerHTML="City Name "+result.city[i].name+" ("+result.city[i].id+")";
+                        document.querySelector("#country").innerHTML="Country "+result.city[i].country;
+                        document.querySelector("#coor").innerHTML="Coordinates (lat, lon): "+result.city[i].coord.lat+", "+result.city[i].coord.lon;
+                    }
+                }
+            });
+        }  
+        
+    </script>
+</body>
+</html>

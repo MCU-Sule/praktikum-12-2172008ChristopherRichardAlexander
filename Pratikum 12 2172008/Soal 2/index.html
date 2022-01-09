@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="2172008 Christopher Richard Alexander">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body{
+            text-align: center;
+        }
+        input{
+            width: 80%;
+        }
+        .container{
+            background-color: black;
+            width: 90%;
+            height: 800px;
+            margin: auto;
+        }
+        .kotak{
+            height: 200px;
+            width: 90%;
+            padding-top: 20px;
+            margin-top: 20px;
+            padding-left: 50px;
+        }
+        .head{
+            width:80%;
+        }
+        .img1{
+            width: 60px;
+            height: 60px;
+            border: 1px solid orange;
+            border-radius: 10px;
+            float: left;
+        }
+        .judul1{
+            width: 90%;
+            height: 40px;
+            background-color: darkgoldenrod;
+            float: left;
+            margin-top: 30px;
+            text-align: left;
+            font-size: xx-large;
+            font-weight: bolder;
+            color: yellow;
+        }
+        .desc1{
+            border: 2px solid darkgoldenrod;
+            width: 73%;
+            height: 100px;
+            margin-top: 60px;
+            margin-left: 60px;
+            border-top: none;
+            color: white;
+            text-align: left;
+        }
+        .img2{
+            width: 60px;
+            height: 60px;
+            border: 1px solid orange;
+            border-radius: 10px;
+            float: left;
+        }
+        .judul2{
+            width: 90%;
+            height: 40px;
+            background-color: darkgoldenrod;
+            float: left;
+            margin-top: 30px;
+            text-align: left;
+            font-size: xx-large;
+            font-weight: bolder;
+            color: yellow;
+        }
+        .desc2{
+            border: 2px solid darkgoldenrod;
+            width: 73%;
+            height: 100px;
+            margin-top: 60px;
+            margin-left: 60px;
+            border-top: none;
+            color: white;
+            text-align: left;
+        }
+        .img3{
+            width: 60px;
+            height: 60px;
+            border: 1px solid orange;
+            border-radius: 10px;
+            float: left;
+        }
+        .judul3{
+            width: 90%;
+            height: 40px;
+            background-color: darkgoldenrod;
+            float: left;
+            margin-top: 30px;
+            text-align: left;
+            font-size: xx-large;
+            font-weight: bolder;
+            color: yellow;
+        }
+        .desc3{
+            border: 2px solid darkgoldenrod;
+            width: 73%;
+            height: 100px;
+            margin-top: 60px;
+            margin-left: 60px;
+            border-top: none;
+            color: white;
+            text-align: left;
+        }
+    </style>
+</head>
+<body onload="random()">
+    <input onclick="random()" type="button" value="Find me 3 random champion">
+    <div class="container">
+        <div class="kotak">
+            <div class="head">
+                <div class="img1"></div>
+                <div class="judul1"></div>
+            </div>
+            <div class="desc1"></div>
+        </div>
+        <div class="kotak">
+            <div class="head">
+                <div class="img2"></div>
+                <div class="judul2"></div>
+            </div>
+            <div class="desc2"></div>
+        </div>
+        <div class="kotak">
+            <div class="head">
+                <div class="img3"></div>
+                <div class="judul3"></div>
+            </div>
+            <div class="desc3"></div>
+        </div>
+    </div>
+    <script>
+        function random(){
+            $.getJSON("league.json", function (result){
+                for(let i=0; i<3;i++){
+                    let x = i+1;
+                    const values = Object.values(result);
+                    const nilairandom = values[parseInt(Math.random()*values.length)]
+                    console.log(result[i].icon);
+                    document.querySelector(".img"+x).innerHTML="<img src='"+nilairandom.icon+"' width='60px' height='60px'>";
+                    document.querySelector(".judul"+x).innerHTML=nilairandom.name;
+                    document.querySelector(".desc"+x).innerHTML=nilairandom.description;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
